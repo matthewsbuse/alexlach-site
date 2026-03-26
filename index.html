@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>@ALEXLACH7 — Soumettre ma candidature</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --text: #e0e0e0;
+      --text-muted: rgba(255, 255, 255, 0.55);
+      --accent: #3b5eff;
+      --btn-bg: #2a3a7c;
+      --card-bg: #ffffff;
+      --card-text: #111111;
+      --radius: 12px;
+      --max-w: 500px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      background-image: radial-gradient(ellipse at 50% 0%, #12122a 0%, #0a0a0f 70%);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    #app {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 30px 20px;
+    }
+
+    section[data-step] {
+      display: none;
+    }
+
+    section[data-step].active {
+      display: block;
+      animation: fadeIn 0.35s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .header {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      margin-bottom: 40px;
+      text-transform: uppercase;
+    }
+
+    .header span {
+      font-weight: 500;
+    }
+
+    .landing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      text-align: center;
+    }
+
+    .landing .header {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+    }
+
+    .landing h1 {
+      font-weight: 200;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+
+    .landing h1 .gradient-text {
+      background: linear-gradient(to right, #ffffff, #666666);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .landing .divider {
+      width: 40px;
+      height: 2px;
+      background: linear-gradient(to right, #444, #222);
+      border-radius: 1px;
+      margin-bottom: 40px;
+    }
+
+    .btn-start {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      padding: 18px 60px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .btn-start:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 6px;
+      background: #1a1a2e;
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: 3px;
+      transition: width 0.4s ease;
+    }
+
+    .btn-back {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 0;
+      margin-bottom: 24px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .btn-back:hover {
+      color: var(--text);
+    }
+
+    .question {
+      font-size: clamp(1.2rem, 4vw, 1.5rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
+
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .option-card {
+      display: block;
+      width: 100%;
+      background: var(--card-bg);
+      color: var(--card-text);
+      border: none;
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      font-size: 16px;
+      font-weight: 400;
+      text-align: left;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .option-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(59, 94, 255, 0.12);
+    }
+
+    .option-card:active {
+      transform: translateY(0);
+    }
+
+    .number-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .number-btn {
+      aspect-ratio: 1;
+      background: var(--card-bg);
+      color: var(--card-text);
+      border: 2px solid transparent;
+      border-radius: var(--radius);
+      font-size: 18px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s, border-color 0.2s, background 0.2s;
+    }
+
+    .number-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .number-btn.selected {
+      border-color: var(--accent);
+      background: #eef1ff;
+    }
+
+    .btn-cta {
+      display: block;
+      width: 100%;
+      background: var(--btn-bg);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius);
+      padding: 18px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-cta:hover {
+      opacity: 0.9;
+    }
+
+    .btn-cta:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .form-row input {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .form-group {
+      margin-bottom: 12px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+    }
+
+    input, textarea {
+      background: var(--card-bg);
+      color: var(--card-text);
+      border: none;
+      border-radius: var(--radius);
+      padding: 16px 18px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+      transition: box-shadow 0.2s;
+    }
+
+    input:focus, textarea:focus {
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: #999;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .success-message {
+      text-align: center;
+      padding: 60px 20px;
+    }
+
+    .success-message h2 {
+      font-weight: 300;
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .success-message p {
+      color: var(--text-muted);
+      font-size: 15px;
+    }
+
+    @media (max-width: 480px) {
+      .landing .header {
+        left: 20px;
+        top: 20px;
+      }
+
+      .form-row {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .number-grid {
+        gap: 8px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Step 0: Landing -->
+    <section data-step="0" class="active">
+      <div class="landing">
+        <div class="header">
+          <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
+        </div>
+        <h1>
+          Soumettre ma<br>
+          <span class="gradient-text">candidature</span>
+        </h1>
+        <div class="divider"></div>
+        <button class="btn-start" id="btnStart">COMMENCER</button>
+      </div>
+    </section>
+
+    <!-- Step 1: Occupation -->
+    <section data-step="1">
+      <div class="header">
+        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
+      </div>
+      <div class="progress-header">
+        <span>Étape 1 sur 4</span>
+        <span>25%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 25%"></div>
+      </div>
+      <p class="question">Qu'est-ce que tu fais présentement ?</p>
+      <button class="option-card" data-answer="occupation" data-value="Étudiant">Étudiant</button>
+      <button class="option-card" data-answer="occupation" data-value="Employé">Employé</button>
+      <button class="option-card" data-answer="occupation" data-value="Business à temps partiel">Business à temps partiel</button>
+      <button class="option-card" data-answer="occupation" data-value="Business à temps plein">Business à temps plein</button>
+    </section>
+
+    <!-- Step 2: Income -->
+    <section data-step="2">
+      <div class="header">
+        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
+      </div>
+      <div class="progress-header">
+        <span>Étape 2 sur 4</span>
+        <span>50%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 50%"></div>
+      </div>
+      <button class="btn-back" data-back>&#8592; Retour</button>
+      <p class="question">Tu fais combien par mois actuellement ?</p>
+      <button class="option-card" data-answer="income" data-value="Moins de 1 000$">Moins de 1 000$</button>
+      <button class="option-card" data-answer="income" data-value="1 000$ – 5 000$">1 000$ – 5 000$</button>
+      <button class="option-card" data-answer="income" data-value="5 000$ – 10 000$">5 000$ – 10 000$</button>
+      <button class="option-card" data-answer="income" data-value="10 000$+">10 000$+</button>
+    </section>
+
+    <!-- Step 3: Commitment -->
+    <section data-step="3">
+      <div class="header">
+        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
+      </div>
+      <div class="progress-header">
+        <span>Étape 3 sur 4</span>
+        <span>75%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 75%"></div>
+      </div>
+      <button class="btn-back" data-back>&#8592; Retour</button>
+      <p class="question">Sur une échelle de 1 à 10, à quel point es-tu prêt à t'impliquer pour réussir ?</p>
+      <p class="subtitle">Sélectionne ton niveau d'implication</p>
+      <div class="number-grid">
+        <button class="number-btn" data-num="1">1</button>
+        <button class="number-btn" data-num="2">2</button>
+        <button class="number-btn" data-num="3">3</button>
+        <button class="number-btn" data-num="4">4</button>
+        <button class="number-btn" data-num="5">5</button>
+        <button class="number-btn" data-num="6">6</button>
+        <button class="number-btn" data-num="7">7</button>
+        <button class="number-btn" data-num="8">8</button>
+        <button class="number-btn" data-num="9">9</button>
+        <button class="number-btn" data-num="10">10</button>
+      </div>
+      <button class="btn-cta" id="btnContinue" disabled>Continuer</button>
+    </section>
+
+    <!-- Step 4: Contact Info -->
+    <section data-step="4">
+      <div class="header">
+        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
+      </div>
+      <div class="progress-header">
+        <span>Étape 4 sur 4</span>
+        <span>100%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 100%"></div>
+      </div>
+      <button class="btn-back" data-back>&#8592; Retour</button>
+      <p class="question">Dernière étape — Dis-moi qui tu es</p>
+      <form id="contactForm">
+        <div class="form-row">
+          <input type="text" id="prenom" placeholder="Prénom *" required>
+          <input type="text" id="nom" placeholder="Nom *" required>
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email *" required>
+        </div>
+        <div class="form-group">
+          <input type="tel" id="telephone" placeholder="Téléphone (optionnel)">
+        </div>
+        <div class="form-group">
+          <textarea id="message" placeholder="Message court (optionnel)"></textarea>
+        </div>
+        <button type="submit" class="btn-cta" id="btnSubmit" disabled>Envoyer la demande</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Configuration
+    // Set this to your webhook/API endpoint to receive form submissions
+    const API_ENDPOINT = null;
+
+    // State
+    const state = {
+      currentStep: 0,
+      answers: {
+        occupation: null,
+        income: null,
+        commitment: null,
+        prenom: '',
+        nom: '',
+        email: '',
+        telephone: '',
+        message: ''
+      }
+    };
+
+    // Navigation
+    function goToStep(n) {
+      document.querySelectorAll('section[data-step]').forEach(s => s.classList.remove('active'));
+      const target = document.querySelector(`section[data-step="${n}"]`);
+      if (target) {
+        target.classList.add('active');
+        state.currentStep = n;
+        window.scrollTo(0, 0);
+      }
+    }
+
+    function goBack() {
+      if (state.currentStep > 0) {
+        goToStep(state.currentStep - 1);
+      }
+    }
+
+    // Form Validation
+    function validateForm() {
+      const prenom = document.getElementById('prenom').value.trim();
+      const nom = document.getElementById('nom').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      document.getElementById('btnSubmit').disabled = !(prenom && nom && emailValid);
+    }
+
+    // Init
+    document.addEventListener('DOMContentLoaded', function () {
+      // Start button
+      document.getElementById('btnStart').addEventListener('click', function () {
+        goToStep(1);
+      });
+
+      // Option cards (steps 1 & 2)
+      document.querySelectorAll('.option-card').forEach(function (card) {
+        card.addEventListener('click', function () {
+          const key = this.dataset.answer;
+          state.answers[key] = this.dataset.value;
+          goToStep(state.currentStep + 1);
+        });
+      });
+
+      // Back buttons
+      document.querySelectorAll('[data-back]').forEach(function (btn) {
+        btn.addEventListener('click', goBack);
+      });
+
+      // Number grid (step 3)
+      const numberBtns = document.querySelectorAll('.number-btn');
+      numberBtns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          numberBtns.forEach(function (b) { b.classList.remove('selected'); });
+          this.classList.add('selected');
+          state.answers.commitment = this.dataset.num;
+          document.getElementById('btnContinue').disabled = false;
+        });
+      });
+
+      // Continue button (step 3)
+      document.getElementById('btnContinue').addEventListener('click', function () {
+        goToStep(4);
+      });
+
+      // Form validation (step 4)
+      ['prenom', 'nom', 'email'].forEach(function (id) {
+        document.getElementById(id).addEventListener('input', validateForm);
+      });
+
+      // Form submission
+      document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        state.answers.prenom = document.getElementById('prenom').value.trim();
+        state.answers.nom = document.getElementById('nom').value.trim();
+        state.answers.email = document.getElementById('email').value.trim();
+        state.answers.telephone = document.getElementById('telephone').value.trim();
+        state.answers.message = document.getElementById('message').value.trim();
+
+        const section = document.querySelector('section[data-step="4"]');
+
+        if (API_ENDPOINT) {
+          document.getElementById('btnSubmit').disabled = true;
+          document.getElementById('btnSubmit').textContent = 'Envoi en cours...';
+
+          fetch(API_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(state.answers)
+          })
+            .then(function (res) {
+              if (!res.ok) throw new Error('Erreur réseau');
+              showSuccess(section);
+            })
+            .catch(function () {
+              document.getElementById('btnSubmit').disabled = false;
+              document.getElementById('btnSubmit').textContent = 'Envoyer la demande';
+              alert('Une erreur est survenue. Veuillez réessayer.');
+            });
+        } else {
+          console.log('Submission:', state.answers);
+          showSuccess(section);
+        }
+      });
+    });
+
+    function showSuccess(section) {
+      section.innerHTML =
+        '<div class="success-message">' +
+        '<h2>Merci !</h2>' +
+        '<p>Ta demande a été envoyée avec succès.<br>On te revient très bientôt.</p>' +
+        '</div>';
+    }
+  </script>
+</body>
+</html>
