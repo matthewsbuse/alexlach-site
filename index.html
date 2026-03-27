@@ -53,18 +53,20 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* ── Header ── */
     .header {
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.2em;
       margin-bottom: 40px;
       text-transform: uppercase;
+      background: linear-gradient(135deg, #d4d4d4, #a0a0a0, #c0c0c0, #888888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    .header span {
-      font-weight: 500;
-    }
-
+    /* ── Landing ── */
     .landing {
       display: flex;
       flex-direction: column;
@@ -120,6 +122,7 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
+    /* ── Progress Bar ── */
     .progress-header {
       display: flex;
       justify-content: space-between;
@@ -145,6 +148,7 @@
       transition: width 0.4s ease;
     }
 
+    /* ── Back Button ── */
     .btn-back {
       background: none;
       border: none;
@@ -163,6 +167,7 @@
       color: var(--text);
     }
 
+    /* ── Question Text ── */
     .question {
       font-size: clamp(1.2rem, 4vw, 1.5rem);
       font-weight: 300;
@@ -177,6 +182,7 @@
       margin-bottom: 20px;
     }
 
+    /* ── Option Cards ── */
     .option-card {
       display: block;
       width: 100%;
@@ -202,6 +208,7 @@
       transform: translateY(0);
     }
 
+    /* ── Number Grid ── */
     .number-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -233,6 +240,7 @@
       background: #eef1ff;
     }
 
+    /* ── CTA Buttons ── */
     .btn-cta {
       display: block;
       width: 100%;
@@ -256,6 +264,7 @@
       cursor: not-allowed;
     }
 
+    /* ── Form Inputs ── */
     .form-row {
       display: flex;
       gap: 12px;
@@ -301,6 +310,7 @@
       min-height: 100px;
     }
 
+    /* ── Success Message ── */
     .success-message {
       text-align: center;
       padding: 60px 20px;
@@ -317,6 +327,7 @@
       font-size: 15px;
     }
 
+    /* ── Responsive ── */
     @media (max-width: 480px) {
       .landing .header {
         left: 20px;
@@ -339,9 +350,7 @@
     <!-- Step 0: Landing -->
     <section data-step="0" class="active">
       <div class="landing">
-        <div class="header">
-          <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
-        </div>
+        <div class="header">@ALEXLACH7</div>
         <h1>
           Soumettre ma<br>
           <span class="gradient-text">candidature</span>
@@ -353,15 +362,13 @@
 
     <!-- Step 1: Occupation -->
     <section data-step="1">
-      <div class="header">
-        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
-      </div>
+      <div class="header">@ALEXLACH7</div>
       <div class="progress-header">
-        <span>Étape 1 sur 4</span>
-        <span>25%</span>
+        <span>Étape 1 sur 5</span>
+        <span>20%</span>
       </div>
       <div class="progress-track">
-        <div class="progress-fill" style="width: 25%"></div>
+        <div class="progress-fill" style="width: 20%"></div>
       </div>
       <p class="question">Qu'est-ce que tu fais présentement ?</p>
       <button class="option-card" data-answer="occupation" data-value="Étudiant">Étudiant</button>
@@ -372,15 +379,13 @@
 
     <!-- Step 2: Income -->
     <section data-step="2">
-      <div class="header">
-        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
-      </div>
+      <div class="header">@ALEXLACH7</div>
       <div class="progress-header">
-        <span>Étape 2 sur 4</span>
-        <span>50%</span>
+        <span>Étape 2 sur 5</span>
+        <span>40%</span>
       </div>
       <div class="progress-track">
-        <div class="progress-fill" style="width: 50%"></div>
+        <div class="progress-fill" style="width: 40%"></div>
       </div>
       <button class="btn-back" data-back>&#8592; Retour</button>
       <p class="question">Tu fais combien par mois actuellement ?</p>
@@ -392,15 +397,13 @@
 
     <!-- Step 3: Commitment -->
     <section data-step="3">
-      <div class="header">
-        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
-      </div>
+      <div class="header">@ALEXLACH7</div>
       <div class="progress-header">
-        <span>Étape 3 sur 4</span>
-        <span>75%</span>
+        <span>Étape 3 sur 5</span>
+        <span>60%</span>
       </div>
       <div class="progress-track">
-        <div class="progress-fill" style="width: 75%"></div>
+        <div class="progress-fill" style="width: 60%"></div>
       </div>
       <button class="btn-back" data-back>&#8592; Retour</button>
       <p class="question">Sur une échelle de 1 à 10, à quel point es-tu prêt à t'impliquer pour réussir ?</p>
@@ -420,13 +423,29 @@
       <button class="btn-cta" id="btnContinue" disabled>Continuer</button>
     </section>
 
-    <!-- Step 4: Contact Info -->
+    <!-- Step 4: Vente -->
     <section data-step="4">
-      <div class="header">
-        <span style="color:#e74c3c">@</span><span style="color:#e67e22">A</span><span style="color:#f1c40f">L</span><span style="color:#2ecc71">E</span><span style="color:#3498db">X</span><span style="color:#9b59b6">L</span><span style="color:#e74c3c">A</span><span style="color:#e67e22">C</span><span style="color:#f1c40f">H</span><span style="color:#2ecc71">7</span>
-      </div>
+      <div class="header">@ALEXLACH7</div>
       <div class="progress-header">
-        <span>Étape 4 sur 4</span>
+        <span>Étape 4 sur 5</span>
+        <span>80%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" style="width: 80%"></div>
+      </div>
+      <button class="btn-back" data-back>&#8592; Retour</button>
+      <p class="question">Pourquoi veux-tu travailler dans la vente ?</p>
+      <div class="form-group">
+        <textarea id="vente" placeholder="Ta réponse..."></textarea>
+      </div>
+      <button class="btn-cta" id="btnContinueVente" disabled>Continuer</button>
+    </section>
+
+    <!-- Step 5: Contact Info -->
+    <section data-step="5">
+      <div class="header">@ALEXLACH7</div>
+      <div class="progress-header">
+        <span>Étape 5 sur 5</span>
         <span>100%</span>
       </div>
       <div class="progress-track">
@@ -454,17 +473,18 @@
   </div>
 
   <script>
-    // Configuration
+    // ── Configuration ──
     // Set this to your webhook/API endpoint to receive form submissions
     const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbw58ukVjBB2aJbMekharhSztlDb55VzfLnnb8J-UwkdOSf1_j7ZegVTm2A1QArn6o6-/exec";
 
-    // State
+    // ── State ──
     const state = {
       currentStep: 0,
       answers: {
         occupation: null,
         income: null,
         commitment: null,
+        vente: '',
         prenom: '',
         nom: '',
         email: '',
@@ -473,7 +493,7 @@
       }
     };
 
-    // Navigation
+    // ── Navigation ──
     function goToStep(n) {
       document.querySelectorAll('section[data-step]').forEach(s => s.classList.remove('active'));
       const target = document.querySelector(`section[data-step="${n}"]`);
@@ -490,7 +510,7 @@
       }
     }
 
-    // Form Validation
+    // ── Form Validation ──
     function validateForm() {
       const prenom = document.getElementById('prenom').value.trim();
       const nom = document.getElementById('nom').value.trim();
@@ -499,7 +519,12 @@
       document.getElementById('btnSubmit').disabled = !(prenom && nom && emailValid);
     }
 
-    // Init
+    function validateVente() {
+      const vente = document.getElementById('vente').value.trim();
+      document.getElementById('btnContinueVente').disabled = !vente;
+    }
+
+    // ── Init ──
     document.addEventListener('DOMContentLoaded', function () {
       // Start button
       document.getElementById('btnStart').addEventListener('click', function () {
@@ -536,7 +561,16 @@
         goToStep(4);
       });
 
-      // Form validation (step 4)
+      // Vente textarea validation (step 4)
+      document.getElementById('vente').addEventListener('input', validateVente);
+
+      // Continue button (step 4)
+      document.getElementById('btnContinueVente').addEventListener('click', function () {
+        state.answers.vente = document.getElementById('vente').value.trim();
+        goToStep(5);
+      });
+
+      // Form validation (step 5)
       ['prenom', 'nom', 'email'].forEach(function (id) {
         document.getElementById(id).addEventListener('input', validateForm);
       });
@@ -551,7 +585,7 @@
         state.answers.telephone = document.getElementById('telephone').value.trim();
         state.answers.message = document.getElementById('message').value.trim();
 
-        const section = document.querySelector('section[data-step="4"]');
+        const section = document.querySelector('section[data-step="5"]');
 
         if (API_ENDPOINT) {
           document.getElementById('btnSubmit').disabled = true;
