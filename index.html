@@ -462,10 +462,10 @@
           <input type="email" id="email" placeholder="Email *" required>
         </div>
         <div class="form-group">
-          <input type="tel" id="telephone" placeholder="Téléphone (optionnel)">
+          <input type="tel" id="telephone" placeholder="Téléphone *" required>
         </div>
         <div class="form-group">
-          <textarea id="message" placeholder="Message court (optionnel)"></textarea>
+          <textarea id="message" placeholder="Message court *" required></textarea>
         </div>
         <button type="submit" class="btn-cta" id="btnSubmit" disabled>Envoyer la demande</button>
       </form>
@@ -474,7 +474,6 @@
 
   <script>
     // ── Configuration ──
-    // Set this to your webhook/API endpoint to receive form submissions
     const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbyMsMBWToYbi2M2URvNHvHZ684RSpoyEzQIEORHiJXUdDWac7XZOWZVogKnA516seT8/exec";
 
     // ── State ──
@@ -515,8 +514,10 @@
       const prenom = document.getElementById('prenom').value.trim();
       const nom = document.getElementById('nom').value.trim();
       const email = document.getElementById('email').value.trim();
+      const telephone = document.getElementById('telephone').value.trim();
+      const message = document.getElementById('message').value.trim();
       const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-      document.getElementById('btnSubmit').disabled = !(prenom && nom && emailValid);
+      document.getElementById('btnSubmit').disabled = !(prenom && nom && emailValid && telephone && message);
     }
 
     function validateVente() {
@@ -571,7 +572,7 @@
       });
 
       // Form validation (step 5)
-      ['prenom', 'nom', 'email'].forEach(function (id) {
+      ['prenom', 'nom', 'email', 'telephone', 'message'].forEach(function (id) {
         document.getElementById(id).addEventListener('input', validateForm);
       });
 
