@@ -456,7 +456,7 @@
   <script>
     // Configuration
     // Set this to your webhook/API endpoint to receive form submissions
-    const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbwMYb0kuhggxp09mInplaHYwaairkOob7IDuF54R9pJCNOy5Nopu43G4q7Alb-3lYyA/exec";
+    const API_ENDPOINT = "https://script.google.com/macros/s/AKfycbw58ukVjBB2aJbMekharhSztlDb55VzfLnnb8J-UwkdOSf1_j7ZegVTm2A1QArn6o6-/exec";
 
     // State
     const state = {
@@ -559,11 +559,11 @@
 
           fetch(API_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify(state.answers)
           })
-            .then(function (res) {
-              if (!res.ok) throw new Error('Erreur réseau');
+            .then(function () {
               showSuccess(section);
             })
             .catch(function () {
